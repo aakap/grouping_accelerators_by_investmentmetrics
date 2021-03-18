@@ -17,6 +17,7 @@ To explore this question, I used data provided by [Crunchbase](https://github.co
   4. number of diversity investments
   5. number of lead investors
   6. growth percentage
+
 as these fields encompass some of the key characteristics founders and other investors look at when evaluating acclerators holistically. The raw data files are in the repository. After manipulating the raw data (as explained in the Data Analysis seection below), I ran a cluster analysis on the variables with five anchors as this number of clusters seemed to give variation between the variables to further sort the data. The cluster analysis results are shown in Table 1 while the distribution of clustered organizations are in Figure 1. In this distribution, the number on the y-axis corresponds to the organization number. Figure 2 shows the frequency distribution of how many accelerators were grouped into each cluster. 
 
 #### *Table 1: Cluster Analysis Results*
