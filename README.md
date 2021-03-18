@@ -36,19 +36,23 @@ Table 1 shows the cluster analysis results. From this, we can see that the five 
 
 These results show most accelerators have moderate scores across the board, including those that are well known. An overwhelming majority are actually lower across the board in terms of investment number, exits, etc., which is surprising because venture funding is a dime a dozen now. It is possible that because capital is easy to come across, startups are looking less favorably upon accelerators. The biggest differentiator seems to be with growth as several groups had similar results across the other five categories but an opposite trend for growth, which may suggest that the other five categories are correlated with each other. A multivariate regression could be helpful to see the direct trends between seemingly related variables such as number of diversity investments and number of total investments. 
 
-For startups looking at which accelerator to engage, there are a couple of suggestions to keep in mind. If the startup is looking for accelerators that emphasize diversity in their portfolio, cluster 2 and 5 are optimal and there are only a handful of accelerators to choose from. If a startup is looking for a quickly growing accelerator, clusters 1 and 3 would be the best bet. Finally, if a startup is looking for a lead investor, which is often a very important part of the funding journey, cluster 5 would be optimal and cluster 2 may have some good options. For investors looking to co-invest with accelerators, it would be most beneficial to get to know those in clusters 1, 2, and 5 as these are growing rapidly or have signficantly higher exits, indicating investment successs. Finally, it is important to note that this analysis did not evenly distribute the clusters. It is possible that there are other factors that would better distinguish the accelerators from each other. 
+For startups looking at which accelerator to engage, there are a couple of suggestions to keep in mind. If the startup is looking for accelerators that emphasize diversity in their portfolio, cluster 2 and 5 are optimal and there are only a handful of accelerators to choose from. If a startup is looking for a quickly growing accelerator, clusters 1 and 3 would be the best bet. Finally, if a startup is looking for a lead investor, which is often a very important part of the funding journey, cluster 5 would be optimal and cluster 2 may have some good options. For investors looking to co-invest with accelerators, it would be most beneficial to get to know those in clusters 1, 2, and 5 as these are growing rapidly or have signficantly higher exits, indicating investment successs. Finally, it is important to note that this analysis did not evenly distribute the clusters. It is possible that there are other factors that would better distinguish the accelerators from each other. Further analysis should be conducted with multivariate regressions and factors such as category of investment or size of round to more comprehensively classify the accelerators. 
 
 
 ## Data Analysis:
 To process the data I used the following steps:
-1. Filter currency to only display USD with GUI-based Filter function
-2. Use "Find and Replace" GUI to remove "z" from all Date-Time columns and replace with a blank space
-3. Use INT(Col, "d") function to convert Date-Time columns into Date only 
-4. Take difference between start date and end date after the dates are converted into date only to dislpay number of days the ad ran for
-5. Use UNIQUE function on OrganizationName column to get list of individual organizations without repetition
-6. From filtered list, manually determine which organizations were directly tied to a political candidate vs which organizations were independent and grassroots 
-7. Use IF function to add "1" to Is Org Political column if the OrganizationName column matched any of the organizations pre-determined as political. Else add "0"
-8. Generate scatterplot of Impressions vs Spending and add line of best fit (linear) with R-squared value
-9. Use Data Analysis ToolPak to generate multivariate regression with Impressions as the y-variable and Length, Spending, and Is Org Political as the x-variables
-10. Find which independent variables had p values that were significant (<0.05) and re-run regression on all variables that were signficant 
-11. Analyze findings 
+1. Filter data column by column to find accelerators with information for all six categories investigated
+2. Assign each organization a number
+3. Find means and standard deviations using AVERAGE and STD DEV of each variable 
+4. Use STANDARDIZE to find z-scores of each variable
+5. Create anchor chart with VLOOKUP to assign cluster numbers to organization names
+6. Use VLOOKUP within anchor chart to assign z-scores correlating to organization and variable
+7. Use SUMXMY2 function to calculate min distance squared for each organization to the anchor values
+8. Use MIN to find minimum distance from the five cluster anchors
+9. Use MATCH to match the cluster to the minimum distance
+10. Use SUM to sum the min distance squared 
+11. Run Cluster Analysis through the SOLVER plug-in, setting the constraints to int and 1<=x<=107. Run an evolutionary solver with mutation rate 0.5, solving for min of sum of squares
+12. Analyze results
+13. Use COUNTIF to sum the number of organization within each cluster
+14. Plot a bar graph showing this frequency distribution
+15. Plot a scatter plot with organization number as the y-variable and cluster number as the x-variable
